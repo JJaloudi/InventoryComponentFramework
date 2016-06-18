@@ -26,6 +26,7 @@ void AInventoryContainer::Tick( float DeltaTime )
 
 }
 
+//Our network replication here.
 void AInventoryContainer::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -33,6 +34,7 @@ void AInventoryContainer::GetLifetimeReplicatedProps(TArray< FLifetimeProperty >
 	DOREPLIFETIME(AInventoryContainer, Items);
 }
 
+//The system allows for an auto stack creation method.
 bool AInventoryContainer::AddItem(TSubclassOf<AItemBase> Item, int Quantity) {
 	auto obj = Item.GetDefaultObject();
 	bool CreatedNewStack = false;
@@ -116,6 +118,7 @@ bool AInventoryContainer::AddItem(TSubclassOf<AItemBase> Item, int Quantity) {
 	return CreatedNewStack;
 }
 
+//Simple function primarily used internally.
 int AInventoryContainer::GetSlot(TSubclassOf<AItemBase> Item) {
 	for (int i = 0; i < Items.Num(); i++) {
 		if (Items[i].Reference == Item) {
